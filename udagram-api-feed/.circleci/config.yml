@@ -1,0 +1,4 @@
+docker build -t udagram-api-feed ./udagram-api-feed
+docker tag udagram-api-feed josephdaoud/udagram-api-feed:v1
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME"
+docker push josephdaoud/udagram-api-feed:v1
