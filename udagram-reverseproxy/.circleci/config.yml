@@ -1,4 +1,0 @@
-docker build -t udagram-reverseproxy ./udagram-reverseproxy
-docker tag udagram-reverseproxy josephdaoud/udagram-reverseproxy:v1
-echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME"
-docker push josephdaoud/udagram-reverseproxy:v1
