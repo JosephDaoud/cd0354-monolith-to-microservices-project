@@ -11,4 +11,5 @@ export const sequelize = new Sequelize({
   'dialect': config.dialect,
   'storage': ':memory:',
 });
-//not doing anything, just trying to trigger travis 
+//not doing anything, just trying to trigger travis
+//again 
