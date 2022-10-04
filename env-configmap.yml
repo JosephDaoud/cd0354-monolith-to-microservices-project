@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 data:
-  FWD_POSTGRES_HOST: josephdbmicro.csh0ttkjbqe1.us-east-1.rds.amazonaws.com
-  FWD_POSTGRES_DB: josephdb
-  FWD_AWS_BUCKET: arn:aws:s3:::mymicroservicebucket001
-  FWD_AWS_REGION: us-east-1
-  FWD_AWS_PROFILE: default
-  FWD_JWT_SECRET: testing
-  FWD_URL: http://localhost:8100
+  FWD_POSTGRES_HOST: "josephdbmicro.csh0ttkjbqe1.us-east-1.rds.amazonaws.com"
+  FWD_POSTGRES_DB: "josephdb"
+  FWD_AWS_BUCKET: "arn:aws:s3:::mymicroservicebucket001"
+  FWD_AWS_REGION: "us-east-1"
+  FWD_AWS_PROFILE: "default"
+  FWD_JWT_SECRET: "testing"
+  FWD_URL: "http://localhost:8100"
 metadata:
   name: env-config
