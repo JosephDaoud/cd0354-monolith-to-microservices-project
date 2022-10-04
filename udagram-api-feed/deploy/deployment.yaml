@@ -15,10 +15,10 @@ spec:
         service: backend-feed
     spec:
       containers:
-        - image: josephdaoud/udagram-api-feed:v2
+        - image: josephdaoud/udagram-api-feed:v4
           name: backend-feed
           imagePullPolicy: Always
-          
+
           env:
             - name: FWD_URL
               valueFrom:
