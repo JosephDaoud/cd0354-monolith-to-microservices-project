@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: backend-user
+  name: backend-user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: backend-user
+  template:
+    metadata:
+      labels:
+        service: backend-user
+    spec:
+      containers:
+        - image: josephdaoud/udagram-api-user:v1
+          name: backend-user
+          imagePullPolicy: Always
+          
+          env:
+            - name: FWD_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_URL
+            - name: FWD_AWS_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_AWS_BUCKET
+            - name: FWD_AWS_PROFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_AWS_PROFILE
+            - name: FWD_AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_AWS_REGION
+            - name: FWD_JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_JWT_SECRET
+            - name: FWD_POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_POSTGRES_DB
+            - name: FWD_POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_POSTGRES_HOST
+            - name: FWD_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: env-secret
+                  key: FWD_POSTGRES_PASSWORD
+            - name: FWD_POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: env-secret
+                  key: FWD_POSTGRES_USERNAME
+      restartPolicy: Always

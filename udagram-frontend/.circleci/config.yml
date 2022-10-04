@@ -1,4 +1,0 @@
-docker build -t udagram-frontend ./udagram-frontend
-docker tag udagram-frontend josephdaoud/udagram-frontend:v1
-echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME"
-docker push josephdaoud/udagram-frontend:v1

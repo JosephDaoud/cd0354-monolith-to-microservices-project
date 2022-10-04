@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: backend-feed
+  name: backend-feed
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: backend-feed
+  template:
+    metadata:
+      labels:
+        service: backend-feed
+    spec:
+      containers:
+        - image: josephdaoud/udagram-api-feed:v1
+          name: backend-feed
+          imagePullPolicy: Always
+          
+          env:
+            - name: FWD_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_URL
+            - name: FWD_AWS_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_AWS_BUCKET
+            - name: FWD_AWS_PROFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_AWS_PROFILE
+            - name: FWD_AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_AWS_REGION
+            - name: FWD_JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_JWT_SECRET
+            - name: FWD_POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_POSTGRES_DB
+            - name: FWD_POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: FWD_POSTGRES_HOST
+            - name: FWD_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: env-secret
+                  key: FWD_POSTGRES_PASSWORD
+            - name: FWD_POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: env-secret
+                  key: FWD_POSTGRES_USERNAME
+          volumeMounts:
+            - name: aws-secret
+              mountPath: "/root/.aws/"
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: backend
+#   labels:
+#     app: backend-feed
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: backend-feed
+#   template:
+#     metadata:
+#       labels:
+#         app: backend-feed
+#     spec:
+#       containers:
+#         - name: simple-node
+#           image: josephdaoud/udagram-api-feed:v1
+#           ports:
+#             - containerPort: 80
